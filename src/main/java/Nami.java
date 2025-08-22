@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 public class Nami {
-
+    private static String[] tasks = new String[100];
+    private static int taskCount = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -21,9 +22,21 @@ public class Nami {
                 break;
             }
 
+            if(input.equalsIgnoreCase("list")) {
+                System.out.println("____________________________________________________________");
+                for(int i = 0; i < taskCount; i++) {
+                    System.out.println(i + ". " + tasks[i]);
+                }
+                System.out.println("____________________________________________________________");
+                continue;
+            }
+
+            tasks[taskCount] = input;
+            taskCount++;
             System.out.println("____________________________________________________________");
-            System.out.println(" " + input);
+            System.out.println("added " + input);
             System.out.println("____________________________________________________________");
+
         }
         sc.close();
     }
