@@ -1,4 +1,4 @@
-public class Tasks {
+public abstract class Tasks {
     protected String description;
     protected boolean isDone;
 
@@ -22,4 +22,12 @@ public class Tasks {
     public void unmarkAsDone() {
         this.isDone = false;
     }
+
+    public String getType() {
+        return "";
+    }
+
+    public abstract String getResult();
+
+    public abstract String getList();
 }

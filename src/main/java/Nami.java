@@ -25,7 +25,7 @@ public class Nami {
             if(input.equalsIgnoreCase("list")) {
                 System.out.println("____________________________________________________________\n");
                 for(int i = 0; i < taskCount; i++) {
-                    System.out.println(i + ". [" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
+                    System.out.println(tasks[i].getList());
                 }
                 System.out.println("\n____________________________________________________________");
                 continue;
@@ -53,12 +53,49 @@ public class Nami {
                 continue;
             }
 
-            tasks[taskCount]  = new Tasks(input);
-            taskCount++;
-            System.out.println("____________________________________________________________");
-            System.out.println("added " + input);
-            System.out.println("____________________________________________________________");
+            if(input.toLowerCase().startsWith("todo")) {
+                String result = input.substring(5).trim();
+                tasks[taskCount] = new toDo(result);
+                taskCount++;
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[taskCount - 1].getResult());
+                System.out.println("Now you have " + taskCount + " tasks in this list.");
+                System.out.println("____________________________________________________________");
+                continue;
+            }
 
+            if(input.toLowerCase().startsWith("deadline")) {
+                String[] parts = input.split("/by");
+                String result = parts[0].substring(9).trim();
+                String deadline = parts[1].trim();
+                tasks[taskCount] = new Deadlines(result, deadline);
+                taskCount++;
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[taskCount - 1].getResult());
+                System.out.println("Now you have " + taskCount + " tasks in this list.");
+                System.out.println("____________________________________________________________");
+            }
+
+            if(input.toLowerCase().startsWith("event")) {
+                String[] part1 = input.split("/from");
+                String result = part1[0].substring(6).trim();
+                String[] part2 = part1[1].split("/to");
+                String startDate = part2[0].trim();
+                String endDate = part2[1].trim();
+                System.out.println(startDate);
+
+
+                tasks[taskCount] = new Events(result, startDate, endDate);
+                taskCount++;
+
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[taskCount - 1].getResult());
+                System.out.println("Now you have " + taskCount + " tasks in this list.");
+                System.out.println("____________________________________________________________");
+            }
         }
         sc.close();
     }
