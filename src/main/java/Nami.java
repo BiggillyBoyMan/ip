@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Nami {
-    private static Tasks[] tasks = new Tasks[100];
+    private static ArrayList<Tasks> tasks = new ArrayList<>();
     private static int taskCount = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("____________________________________________________________\n");
@@ -24,8 +25,8 @@ public class Nami {
 
             if(input.equalsIgnoreCase("list")) {
                 System.out.println("____________________________________________________________\n");
-                for(int i = 0; i < taskCount; i++) {
-                    System.out.println(tasks[i].getList());
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(i + 1 + ". " + tasks.get(i).getList());
                 }
                 System.out.println("\n____________________________________________________________");
                 continue;
@@ -34,10 +35,10 @@ public class Nami {
             if(input.toLowerCase().startsWith("mark")) {
                 String num_Str = input.substring(5).trim();
                 int num = Integer.parseInt(num_Str);
-                tasks[num].markAsDone();
+                tasks.get(num).markAsDone();
                 System.out.println("____________________________________________________________\n");
                 System.out.println("Nice! I have marked this task as done:\n");
-                System.out.println("[X] " + tasks[num].getDescription());
+                System.out.println("[X] " + tasks.get(num).getDescription());
                 System.out.println("____________________________________________________________");
                 continue;
             }
@@ -45,22 +46,24 @@ public class Nami {
             if(input.toLowerCase().startsWith("unmark")) {
                 String num_Str = input.substring(7).trim();
                 int num = Integer.parseInt(num_Str);
-                tasks[num].unmarkAsDone();
+                tasks.get(num).unmarkAsDone();
                 System.out.println("____________________________________________________________\n");
                 System.out.println("OK, I've marked this task as not done yet:\n");
-                System.out.println("[] " + tasks[num].getDescription());
+                System.out.println("[] " + tasks.get(num).getDescription());
                 System.out.println("____________________________________________________________");
                 continue;
             }
 
             if(input.toLowerCase().startsWith("todo")) {
                 String result = input.substring(5).trim();
-                tasks[taskCount] = new toDo(result);
-                taskCount++;
+                if(result.isEmpty()) {
+                    throw new DukeException("OOPS!!! the description of a todo cannot be empty.");
+                }
+                tasks.add(new toDo(result));
                 System.out.println("____________________________________________________________");
                 System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[taskCount - 1].getResult());
-                System.out.println("Now you have " + taskCount + " tasks in this list.");
+                System.out.println(tasks.get(tasks.size() - 1).getResult());
+                System.out.println("Now you have " + tasks.size() + " tasks in this list.");
                 System.out.println("____________________________________________________________");
                 continue;
             }
@@ -69,13 +72,13 @@ public class Nami {
                 String[] parts = input.split("/by");
                 String result = parts[0].substring(9).trim();
                 String deadline = parts[1].trim();
-                tasks[taskCount] = new Deadlines(result, deadline);
-                taskCount++;
+                tasks.add(new Deadlines(result, deadline));
                 System.out.println("____________________________________________________________");
                 System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[taskCount - 1].getResult());
-                System.out.println("Now you have " + taskCount + " tasks in this list.");
+                System.out.println(tasks.get(tasks.size() - 1).getResult());
+                System.out.println("Now you have " + tasks.size() + " tasks in this list.");
                 System.out.println("____________________________________________________________");
+                continue;
             }
 
             if(input.toLowerCase().startsWith("event")) {
@@ -87,15 +90,28 @@ public class Nami {
                 System.out.println(startDate);
 
 
-                tasks[taskCount] = new Events(result, startDate, endDate);
-                taskCount++;
-
+                tasks.add(new Events(result, startDate, endDate));
                 System.out.println("____________________________________________________________");
                 System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[taskCount - 1].getResult());
+                System.out.println(tasks.get(tasks.size() - 1).getResult());
                 System.out.println("Now you have " + taskCount + " tasks in this list.");
                 System.out.println("____________________________________________________________");
+                continue;
             }
+
+            if(input.toLowerCase().startsWith("delete")) {
+                String num_Str = input.substring(7).trim();
+                int num = Integer.parseInt(num_Str);
+                System.out.println("____________________________________________________________\n");
+                System.out.println("Noted. I've remove this task:");
+                System.out.println("[X] " + tasks.get(num - 1).getResult());
+                System.out.println("____________________________________________________________");
+                tasks.remove(num - 1);
+                continue;
+            }
+
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+
         }
         sc.close();
     }
