@@ -30,4 +30,6 @@ public abstract class Tasks {
     public abstract String getResult();
 
     public abstract String getList();
+
+    public abstract String toStorageFormat();
 }

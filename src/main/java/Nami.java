@@ -1,12 +1,15 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Nami {
     private static ArrayList<Tasks> tasks = new ArrayList<>();
     private static int taskCount = 0;
+    private static Storage storage = new Storage("./data/duke.txt");
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         Scanner sc = new Scanner(System.in);
+        tasks = storage.load();
 
         System.out.println("____________________________________________________________\n");
         System.out.println(" Hello! I'm Nami\n");
@@ -35,10 +38,11 @@ public class Nami {
             if(input.toLowerCase().startsWith("mark")) {
                 String num_Str = input.substring(5).trim();
                 int num = Integer.parseInt(num_Str);
-                tasks.get(num).markAsDone();
+                tasks.get(num - 1).markAsDone();
+                storage.save(tasks);
                 System.out.println("____________________________________________________________\n");
                 System.out.println("Nice! I have marked this task as done:\n");
-                System.out.println("[X] " + tasks.get(num).getDescription());
+                System.out.println("[X] " + tasks.get(num - 1).getDescription());
                 System.out.println("____________________________________________________________");
                 continue;
             }
@@ -46,10 +50,11 @@ public class Nami {
             if(input.toLowerCase().startsWith("unmark")) {
                 String num_Str = input.substring(7).trim();
                 int num = Integer.parseInt(num_Str);
-                tasks.get(num).unmarkAsDone();
+                tasks.get(num - 1).unmarkAsDone();
+                storage.save(tasks);
                 System.out.println("____________________________________________________________\n");
                 System.out.println("OK, I've marked this task as not done yet:\n");
-                System.out.println("[] " + tasks.get(num).getDescription());
+                System.out.println("[] " + tasks.get(num - 1).getDescription());
                 System.out.println("____________________________________________________________");
                 continue;
             }
@@ -60,6 +65,7 @@ public class Nami {
                     throw new DukeException("OOPS!!! the description of a todo cannot be empty.");
                 }
                 tasks.add(new toDo(result));
+                storage.save(tasks);
                 System.out.println("____________________________________________________________");
                 System.out.println("Got it. I've added this task:");
                 System.out.println(tasks.get(tasks.size() - 1).getResult());
@@ -73,6 +79,7 @@ public class Nami {
                 String result = parts[0].substring(9).trim();
                 String deadline = parts[1].trim();
                 tasks.add(new Deadlines(result, deadline));
+                storage.save(tasks);
                 System.out.println("____________________________________________________________");
                 System.out.println("Got it. I've added this task:");
                 System.out.println(tasks.get(tasks.size() - 1).getResult());
@@ -91,10 +98,11 @@ public class Nami {
 
 
                 tasks.add(new Events(result, startDate, endDate));
+                storage.save(tasks);
                 System.out.println("____________________________________________________________");
                 System.out.println("Got it. I've added this task:");
                 System.out.println(tasks.get(tasks.size() - 1).getResult());
-                System.out.println("Now you have " + taskCount + " tasks in this list.");
+                System.out.println("Now you have " + tasks.size() + " tasks in this list.");
                 System.out.println("____________________________________________________________");
                 continue;
             }
@@ -107,6 +115,7 @@ public class Nami {
                 System.out.println("[X] " + tasks.get(num - 1).getResult());
                 System.out.println("____________________________________________________________");
                 tasks.remove(num - 1);
+                storage.save(tasks);
                 continue;
             }
 

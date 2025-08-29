@@ -27,4 +27,9 @@ public class Events extends Tasks{
     public String getList() {
         return "[" + this.getType() + "] [" + this.getStatusIcon() + "] " + this.description + "( by: " + this.startTime + " to: " + this.endTime + " )";
     }
+
+    @Override
+    public String toStorageFormat() {
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + startTime + " | " + endTime;
+    }
 }

@@ -13,4 +13,9 @@ public class toDo extends Tasks {
     public String getList() {
         return "[" + this.getType() + "] [" + this.getStatusIcon() + "] " + this.description;
     }
+
+    @Override
+    public String toStorageFormat() {
+        return "T | " + (isDone ? "1" : "0" + "|" + description);
+    }
 }

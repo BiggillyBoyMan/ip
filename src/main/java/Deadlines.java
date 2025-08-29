@@ -21,4 +21,9 @@ public class Deadlines extends Tasks {
     public String getList() {
         return "[" + this.getType() + "] [" + this.getStatusIcon() + "] " + this.description + " ( by: " + this.deadline + " )";
     }
+
+    @Override
+    public String toStorageFormat() {
+        return " D | " + (isDone ? "1" : "0") + " | " + description + " | " + deadline;
+    }
 }
