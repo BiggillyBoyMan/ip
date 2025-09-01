@@ -1,1 +1,4 @@
- D | 1 | do this | aug24
+D | 0 | return book | 2025-06-06T18:00
+T | 0 | Read book
+D | 0 | Submit report | 2025-08-25T18:00
+E | 0 | Project meeting | 2025-08-26T14:00 | 2025-08-26T16:00

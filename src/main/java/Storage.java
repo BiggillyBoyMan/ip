@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,8 +17,8 @@ public class Storage {
 
         try {
             if (!file.exists()) {
-                file.getParentFile().mkdirs(); // create ./data if missing
-                file.createNewFile(); // create duke.txt if missing
+                file.getParentFile().mkdirs();
+                file.createNewFile();
                 return tasks;
             }
 
@@ -38,7 +40,8 @@ public class Storage {
                         tasks.add(todo);
                         break;
                     case "D":
-                        String deadline = parts[3];
+                        String deadlineStr = parts[3];
+                        LocalDateTime deadline = LocalDateTime.parse(deadlineStr);
                         Tasks d = new Deadlines(description, deadline);
                         if (isDone) d.markAsDone();
                         tasks.add(d);
@@ -46,7 +49,9 @@ public class Storage {
                     case "E":
                         String start = parts[3];
                         String end = parts[4];
-                        Tasks e = new Events(description, start, end);
+                        LocalDateTime startTime = LocalDateTime.parse(start);
+                        LocalDateTime endTime = LocalDateTime.parse(end);
+                        Tasks e = new Events(description, startTime, endTime);
                         if (isDone) e.markAsDone();
                         tasks.add(e);
                         break;
@@ -62,7 +67,7 @@ public class Storage {
     public void save(ArrayList<Tasks> tasks) {
         try {
             File file = new File(filePath);
-            file.getParentFile().mkdirs(); // ensure folder exists
+            file.getParentFile().mkdirs();
 
             FileWriter fw = new FileWriter(filePath);
             for (Tasks t : tasks) {
