@@ -119,7 +119,7 @@ public class Nami {
                 continue;
             }
 
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }
         sc.close();
