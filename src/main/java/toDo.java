@@ -16,6 +16,6 @@ public class toDo extends Tasks {
 
     @Override
     public String toStorageFormat() {
-        return "T | " + (isDone ? "1" : "0" + "|" + description);
+        return "T | " + (isDone ? "1" : "0" + " | " + description);
     }
 }

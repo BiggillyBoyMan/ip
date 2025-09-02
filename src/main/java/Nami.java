@@ -1,13 +1,16 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Nami {
     private static ArrayList<Tasks> tasks = new ArrayList<>();
-    private static int taskCount = 0;
+
     private static Storage storage = new Storage("./data/duke.txt");
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static <localDateTime> void main(String[] args) throws DukeException, IOException {
         Scanner sc = new Scanner(System.in);
         tasks = storage.load();
 
@@ -75,43 +78,63 @@ public class Nami {
             }
 
             if(input.toLowerCase().startsWith("deadline")) {
-                String[] parts = input.split("/by");
-                String result = parts[0].substring(9).trim();
-                String deadline = parts[1].trim();
-                tasks.add(new Deadlines(result, deadline));
-                storage.save(tasks);
-                System.out.println("____________________________________________________________");
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks.get(tasks.size() - 1).getResult());
-                System.out.println("Now you have " + tasks.size() + " tasks in this list.");
-                System.out.println("____________________________________________________________");
+                try {
+                    String[] parts = input.split("/by");
+                    if (parts.length < 2) {
+                        throw new DukeException("OOPS!!! The deadline must have a /by date/time.");
+                    }
+
+                    String description = parts[0].substring(9).trim();
+                    String deadlineStr = parts[1].trim();
+
+                    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                    LocalDateTime deadline = LocalDateTime.parse(deadlineStr, inputFormat);
+
+                    tasks.add(new Deadlines(description, deadline));
+                    storage.save(tasks);
+
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks.get(tasks.size() - 1).getResult());
+                    System.out.println("Now you have " + tasks.size() + " tasks in this list.");
+                    System.out.println("____________________________________________________________");
+                } catch (DateTimeParseException e) {
+                    System.out.println("OOPS!!! Please enter the date/time in the format: d/M/yyyy HHmm");
+                }
                 continue;
             }
 
             if(input.toLowerCase().startsWith("event")) {
-                String[] part1 = input.split("/from");
-                String result = part1[0].substring(6).trim();
-                String[] part2 = part1[1].split("/to");
-                String startDate = part2[0].trim();
-                String endDate = part2[1].trim();
-                System.out.println(startDate);
+                try {
+                    String[] part1 = input.split("/from");
+                    String result = part1[0].substring(6).trim();
+                    String[] part2 = part1[1].split("/to");
+                    String startDate = part2[0].trim();
+                    String endDate = part2[1].trim();
 
+                    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                    LocalDateTime start = LocalDateTime.parse(startDate, inputFormat);
+                    LocalDateTime end = LocalDateTime.parse(endDate, inputFormat);
 
-                tasks.add(new Events(result, startDate, endDate));
-                storage.save(tasks);
-                System.out.println("____________________________________________________________");
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks.get(tasks.size() - 1).getResult());
-                System.out.println("Now you have " + tasks.size() + " tasks in this list.");
-                System.out.println("____________________________________________________________");
-                continue;
+                    tasks.add(new Events(result, start, end));
+                    storage.save(tasks);
+
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks.get(tasks.size() - 1).getResult());
+                    System.out.println("Now you have " + tasks.size() + " tasks in this list.");
+                    System.out.println("____________________________________________________________");
+                    continue;
+                } catch (DateTimeParseException e){
+                    System.out.println("OOPS!!! Please enter the date and time in the format dd/mm/yyyy HHMM");
+                }
             }
 
             if(input.toLowerCase().startsWith("delete")) {
                 String num_Str = input.substring(7).trim();
                 int num = Integer.parseInt(num_Str);
                 System.out.println("____________________________________________________________\n");
-                System.out.println("Noted. I've remove this task:");
+                System.out.println("Noted. I've removed this task:");
                 System.out.println("[X] " + tasks.get(num - 1).getResult());
                 System.out.println("____________________________________________________________");
                 tasks.remove(num - 1);
