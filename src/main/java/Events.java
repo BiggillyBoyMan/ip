@@ -26,7 +26,7 @@ public class Events extends Tasks{
 
     public String getResult() {
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("d MMM yyyy h:mm a");
-        return "[" + this.getType() + "] [" + this.getStatusIcon() + "] " + this.getDescription() + "by: " + this.startTime.format(outputFormat) + "to: " + this.endTime.format(outputFormat);
+        return "[" + this.getType() + "] [" + this.getStatusIcon() + "] " + this.getDescription() + "by: " + this.startTime.format(outputFormat) + " to: " + this.endTime.format(outputFormat);
     }
 
     public String getList() {
