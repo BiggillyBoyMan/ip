@@ -1,9 +1,15 @@
+package Nami;
+
+import Nami.ui.Ui;
+import Nami.storage.Storage;
+import Nami.task.TaskList;
+import Nami.task.Tasks;
+import Nami.parser.Parser;
+import Nami.command.Command;
+import Nami.exception.DukeException;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Nami {
     private Storage storage;

@@ -1,3 +1,4 @@
+package Nami.task;
 public abstract class Tasks {
     protected String description;
     protected boolean isDone;

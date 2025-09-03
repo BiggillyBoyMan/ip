@@ -1,3 +1,9 @@
+package Nami.storage;
+import Nami.task.Deadlines;
+import Nami.task.Events;
+import Nami.task.Tasks;
+import Nami.task.toDo;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

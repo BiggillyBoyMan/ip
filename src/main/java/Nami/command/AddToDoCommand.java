@@ -1,18 +1,21 @@
-import java.time.LocalDateTime;
-
-public class AddEventCommand extends Command {
+package Nami.command;
+import Nami.task.toDo;
+import Nami.ui.Ui;
+import Nami.storage.Storage;
+import Nami.task.TaskList;
+import Nami.task.Tasks;
+import Nami.exception.DukeException;
+public class AddToDoCommand extends Command {
     private final String description;
-    private final LocalDateTime start;
-    private final LocalDateTime end;
-
-    public AddEventCommand(String description, LocalDateTime start, LocalDateTime end) {
+    public AddToDoCommand(String description) {
         this.description = description;
-        this.start = start;
-        this.end = end;
     }
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Tasks t = new Events(description, start, end);
+        if (description == null || description.isEmpty()) {
+            throw new DukeException("the description of a todo cannot be empty.");
+        }
+        Tasks t = new toDo(description);
         tasks.add(t);
         storage.save(tasks.asList());
 

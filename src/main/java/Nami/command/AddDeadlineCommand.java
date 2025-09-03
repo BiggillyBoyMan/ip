@@ -1,4 +1,12 @@
+package Nami.command;
 import java.time.LocalDateTime;
+
+import Nami.task.Deadlines;
+import Nami.ui.Ui;
+import Nami.storage.Storage;
+import Nami.task.TaskList;
+import Nami.task.Tasks;
+import Nami.exception.DukeException;
 
 public class AddDeadlineCommand extends Command {
     private final String description;
