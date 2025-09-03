@@ -72,6 +72,13 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(parseIndex(args));
 
+            case "find":
+                if(args.isEmpty()) {
+                    throw new DukeException("Please provide a keyword to find.");
+                }
+                return new Nami.command.FindCommand(args);
+
+
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
