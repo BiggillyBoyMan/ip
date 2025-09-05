@@ -12,15 +12,16 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Task number out of range.");
         }
         tasks.get(index).unmarkAsDone();
         storage.save(tasks.asList());
-        System.out.println("____________________________________________________________\n");
-        System.out.println("OK, I've marked this task as not done yet:\n\n");
-        System.out.println("[] " + tasks.get(index).getDescription());
-        System.out.println("____________________________________________________________");
+        return
+        "___________________________________\n" +
+        "OK, I've marked this task as not done yet:\n" +
+        "[] " + tasks.get(index).getDescription() +
+        "\n_________________________________";
     }
 }

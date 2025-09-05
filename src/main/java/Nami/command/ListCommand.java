@@ -6,11 +6,16 @@ import Nami.task.Tasks;
 import Nami.exception.DukeException;
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("____________________________________________________________");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("__________________________________\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i).getList());
+            sb.append((i + 1));
+            sb.append(". ");
+            sb.append(tasks.get(i).getList());
+            sb.append("\n");
         }
-        System.out.println("____________________________________________________________");
+        sb.append("__________________________________");
+        return sb.toString();
     }
 }

@@ -46,7 +46,7 @@ public class Parser {
                     LocalDateTime by = LocalDateTime.parse(byStr, INPUT_DATE_FORMAT);
                     return new AddDeadlineCommand(desc, by);
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("OOPSSS!!! Please enter the date/time in the format: d/M/yyyy HHmm");
+                    throw new DukeException("OOPSSS!!! Please enter the date/time in the format: d/M/yyyy HHmm (For e.g. 24/8/2025 2359)");
                 }
             }
 
@@ -65,7 +65,7 @@ public class Parser {
                     LocalDateTime end = LocalDateTime.parse(p2[1].trim(), INPUT_DATE_FORMAT);
                     return new AddEventCommand(desc, start, end);
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("OOPSSS!!! Please enter the date/time in the format: d/M/yyyy HHmm");
+                    throw new DukeException("OOPSSS!!! Please enter the date/time in the format: dd/M/yyyy HH:mm (for e.g 24/8/2025 2359");
                 }
             }
 

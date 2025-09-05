@@ -9,18 +9,18 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int index) { this.index = index; }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Task number out of range.");
         }
         Tasks removed = tasks.get(index);
-
-        System.out.println("____________________________________________________________");
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("[X] " + removed.getResult());
-        System.out.println("____________________________________________________________");
-
         tasks.remove(index);
         storage.save(tasks.asList());
+        return
+        "_______________________________________\n" +
+        "Noted. I've removed this task:\n" +
+        "[X] " + removed.getResult() +
+        "\n_____________________________________";
+
     }
 }

@@ -12,7 +12,7 @@ public class FindCommand extends Command {
         this.Keyword = Keyword;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(Keyword == null || Keyword.isBlank()) {
             throw new DukeException("Please provide a keyword to find");
         }
@@ -26,15 +26,20 @@ public class FindCommand extends Command {
             }
         }
 
-        System.out.println("____________________________________________________________");
+        StringBuilder sb = new StringBuilder();
+        sb.append("____________________________________ \n");
         if(matches.isEmpty()) {
-            System.out.println("No matching tasks found.");
+            sb.append("No matching tasks found.");
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            sb.append("Here are the matching tasks in your list: \n");
             for(int i = 0; i < matches.size(); i++) {
-                System.out.println((i + 1) + ". " + matches.get(i).getList());
+                sb.append((i + 1));
+                sb.append(". ");
+                sb.append(matches.get(i).getList());
+                sb.append("\n");
             }
         }
-        System.out.println("____________________________________________________________");
+        sb.append("____________________________________");
+        return sb.toString();
     }
 }

@@ -30,7 +30,8 @@ public class Nami {
             String input = ui.readCommand();
             try {
                 Command cmd = Parser.parse(input);
-                cmd.execute(tasks, ui, storage);
+                String cd = cmd.execute(tasks, ui, storage);
+                System.out.println(cd);
                 isExit = cmd.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());

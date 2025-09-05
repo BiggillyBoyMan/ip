@@ -11,10 +11,11 @@ public class Ui {
         System.out.println("____________________________________________________________\n");
     }
 
-    public void showGoodbye() {
-        System.out.println("____________________________________________________________\n");
-        System.out.println(" Bye. Hope to see you again soon!\n");
-        System.out.println("____________________________________________________________");
+    public String showGoodbye() {
+        return
+        "____________________________________________________________\n" +
+        " Bye. Hope to see you again soon!\n" +
+        "____________________________________________________________";
     }
 
     public String readCommand() {
