@@ -14,11 +14,26 @@ public class AddEventCommand extends Command {
     private final LocalDateTime start;
     private final LocalDateTime end;
 
+    /**
+     * Constructor
+     * @param description
+     * @param start
+     * @param end
+     */
     public AddEventCommand(String description, LocalDateTime start, LocalDateTime end) {
         this.description = description;
         this.start = start;
         this.end = end;
     }
+
+    /**
+     * Executes the command and return a String to eventually print
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return
+     * @throws DukeException
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Tasks t = new Events(description, start, end);

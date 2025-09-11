@@ -11,6 +11,15 @@ public class FindCommand extends Command {
     public FindCommand(String Keyword) {
         this.Keyword = Keyword;
     }
+
+    /**
+     * Executes the command to find something in the list
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return
+     * @throws DukeException
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(Keyword == null || Keyword.isBlank()) {

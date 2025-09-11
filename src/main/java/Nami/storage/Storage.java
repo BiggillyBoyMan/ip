@@ -13,10 +13,18 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for Storage
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Load task from the text file
+     * @return ArrayList of Tasks
+     */
     public ArrayList<Tasks> load() {
         ArrayList<Tasks> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -70,6 +78,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves a task into the txt file
+     * @param tasks
+     */
     public void save(ArrayList<Tasks> tasks) {
         try {
             File file = new File(filePath);

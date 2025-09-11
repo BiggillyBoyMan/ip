@@ -8,6 +8,9 @@ import Nami.task.TaskList;
 import Nami.task.Tasks;
 import Nami.exception.DukeException;
 
+/**
+ * public Class to add Deadline into the list
+ */
 public class AddDeadlineCommand extends Command {
     private final String description;
     private final LocalDateTime by;
@@ -17,6 +20,14 @@ public class AddDeadlineCommand extends Command {
         this.by = by;
     }
 
+    /**
+     * Execute command to get the String of the command
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return
+     * @throws DukeException
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Tasks t = new Deadlines(description, by);

@@ -16,6 +16,13 @@ public class Nami {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for the Nami class
+     * @param filePath
+     * @throws IOException
+     * @throws DukeException
+     */
+
     public Nami(String filePath) throws IOException, DukeException {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -23,6 +30,9 @@ public class Nami {
         this.tasks = new TaskList(loaded);
     }
 
+    /**
+     * run and initialise the application
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

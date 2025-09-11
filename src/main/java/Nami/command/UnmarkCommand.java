@@ -11,6 +11,14 @@ public class UnmarkCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * unmarks the specific task
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return
+     * @throws DukeException
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.size()) {

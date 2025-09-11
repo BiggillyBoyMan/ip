@@ -1,9 +1,17 @@
 package Nami.task;
 public class toDo extends Tasks {
+    /**
+     * Constructor for toDO task
+     * @param description
+     */
     public toDo(String description) {
         super(description);
     }
 
+    /**
+     * Gets the type and return as a string
+     * @return
+     */
     @Override
     public String getType() {
         return "T";

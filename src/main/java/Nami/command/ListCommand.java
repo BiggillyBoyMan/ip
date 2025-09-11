@@ -5,6 +5,13 @@ import Nami.task.TaskList;
 import Nami.task.Tasks;
 import Nami.exception.DukeException;
 public class ListCommand extends Command {
+    /**
+     * Executes the task of listing all the task
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();

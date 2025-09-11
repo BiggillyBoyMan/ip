@@ -4,11 +4,21 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends Tasks {
     private LocalDateTime deadline;
+
+    /**
+     * Constructor for Deadlines
+     * @param description
+     * @param deadline
+     */
     public Deadlines(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
+    /**
+     * Gets the type when method is called
+     * @return String of 'D'
+     */
     @Override
     public String getType() {
         return "D";
@@ -18,6 +28,10 @@ public class Deadlines extends Tasks {
         return this.deadline;
     }
 
+    /**
+     * gets the result of the String format
+     * @return String
+     */
     public String getResult() {
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
         return "[" + this.getType() + "] [" + this.getStatusIcon() + "] " + this.getDescription() + " by: " + this.deadline.format(outputFormat);

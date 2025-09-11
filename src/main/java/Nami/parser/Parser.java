@@ -13,6 +13,12 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private static final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
+    /**
+     * Commands to branch out different scanner input (initialises the commands by calling the constructors)
+     * @param full
+     * @return
+     * @throws DukeException
+     */
     public static Command parse(String full) throws DukeException {
         String input = full.trim();
         String[] parts = input.split(" ", 2);

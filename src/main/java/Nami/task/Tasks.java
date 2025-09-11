@@ -3,15 +3,27 @@ public abstract class Tasks {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Tasks class
+     * @param description
+     */
     public Tasks(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Get the status whether is it marked or not
+     * @return
+     */
     public String getStatusIcon() {
         return(isDone ? "X" : "");
     }
 
+    /**
+     * Returns the description
+     * @return
+     */
     public String getDescription() {
         return this.description;
     }

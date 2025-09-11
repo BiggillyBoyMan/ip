@@ -8,6 +8,14 @@ public class DeleteCommand extends Command {
     private final int index; // 0-based
     public DeleteCommand(int index) { this.index = index; }
 
+    /**
+     * Executes command to return a String
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return String
+     * @throws DukeException
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.size()) {

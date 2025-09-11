@@ -17,6 +17,10 @@ public class NamiGUI {
     private boolean exit;
     private final Ui ui;
 
+    /**
+     * Constructor for NamiGUI Class
+     * @throws IOException
+     */
     public NamiGUI() throws IOException {
         this.ui = new Ui();
         storage = new Storage("./data/duke.txt");
@@ -24,6 +28,11 @@ public class NamiGUI {
         tasks = new TaskList(loaded);
     }
 
+    /**
+     * gets the response when user inputs a command
+     * @param input
+     * @return
+     */
     public String getResponse(String input) {
         try {
             Command cmd = Parser.parse(input);
