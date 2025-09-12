@@ -83,6 +83,10 @@ public class Storage {
      * @param tasks
      */
     public void save(ArrayList<Tasks> tasks) {
+        assert tasks != null : "tasks must not be null";
+        for (Tasks t : tasks) {
+            assert t != null : "no null elements in tasks";
+        }
         try {
             File file = new File(filePath);
             file.getParentFile().mkdirs();

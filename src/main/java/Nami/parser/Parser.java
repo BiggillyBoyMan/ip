@@ -21,6 +21,7 @@ public class Parser {
      */
     public static Command parse(String full) throws DukeException {
         String input = full.trim();
+        assert input != null: "input should not be null";
         String[] parts = input.split(" ", 2);
         String keyword = parts[0].toLowerCase();
         String args = parts.length > 1 ? parts[1].trim() : "";

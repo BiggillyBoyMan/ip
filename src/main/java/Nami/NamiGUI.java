@@ -25,6 +25,7 @@ public class NamiGUI {
         this.ui = new Ui();
         storage = new Storage("./data/duke.txt");
         ArrayList<Tasks> loaded = storage.load();
+//        assert loaded != null : "Storage.load() must return a non-null list";
         tasks = new TaskList(loaded);
     }
 
