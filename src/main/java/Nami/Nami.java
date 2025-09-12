@@ -10,7 +10,10 @@ import Nami.exception.DukeException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * Entry point and coordinator for the Nami task manager.
+ * Wires {@code Ui}, {@code Storage}, and {@code TaskList}, then runs the CLI loop.
+ */
 public class Nami {
     private Storage storage;
     private TaskList tasks;
@@ -31,7 +34,12 @@ public class Nami {
     }
 
     /**
+<<<<<<< HEAD
      * run and initialise the application
+=======
+     * Starts the read–eval–print loop: reads input, parses into a command, executes it,
+     * and exits when a terminating command is issued.
+>>>>>>> branch-A-JavaDoc
      */
     public void run() {
         ui.showWelcome();
@@ -52,6 +60,9 @@ public class Nami {
         ui.close();
     }
 
+    /**
+     * Program entry point. Delegates to {@link #run()} and handles fatal startup errors.
+     */
     public static void main(String[] args) {
         try {
             new Nami("./data/duke.txt").run();
