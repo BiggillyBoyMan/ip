@@ -29,19 +29,19 @@ dependencies {
 test { useJUnitPlatform() }
 
 application {
-    mainClass = "Nami.ui.Main"          // GUI entry
+    mainClass = "nami.ui.Main"          // GUI entry
 }
 
 /* Make both jars executable and named nicely */
 jar {
-    manifest { attributes 'Main-Class': 'Nami.ui.Main' }
+    manifest { attributes 'Main-Class': 'nami.ui.Main' }
     archiveBaseName.set("Nami")
     archiveVersion.set("")
     archiveClassifier.set("")
 }
 
 shadowJar {
-    manifest { attributes 'Main-Class': 'Nami.ui.Main' }
+    manifest { attributes 'Main-Class': 'nami.ui.Main' }
     archiveFileName.set("Nami.jar")     // single nice filename
 }
 

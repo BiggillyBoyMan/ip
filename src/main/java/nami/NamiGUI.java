@@ -11,41 +11,55 @@ import nami.ui.Ui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The main GUI handler class for the Nami application.
+ * It manages the interaction between user input, task storage,
+ * and application responses.
+ */
 public class NamiGUI {
     private final Storage storage;
     private final TaskList tasks;
-    private boolean exit;
     private final Ui ui;
+    private boolean exit;
 
     /**
-     * Constructor for NamiGUI Class
-     * @throws IOException
+     * Constructs a {@code NamiGUI} instance.
+     *
+     * @throws IOException if the task file cannot be loaded.
      */
     public NamiGUI() throws IOException {
         this.ui = new Ui();
-        storage = new Storage("./data/duke.txt");
-        ArrayList<Tasks> loaded = storage.load();
-//        assert loaded != null : "Storage.load() must return a non-null list";
-        tasks = new TaskList(loaded);
+        this.storage = new Storage("./data/duke.txt");
+        ArrayList<Tasks> loadedTasks = storage.load();
+        this.tasks = new TaskList(loadedTasks);
     }
 
     /**
-     * gets the response when user inputs a command
-     * @param input
-     * @return
+     * Processes a user input and returns the corresponding response message.
+     *
+     * @param input user input string
+     * @return the response message
      */
     public String getResponse(String input) {
         try {
-            Command cmd = Parser.parse(input);
-            String msg = cmd.execute(tasks, ui,storage);   // <-- get message directly
-            exit = cmd.isExit();
-            return msg;
+            Command command = Parser.parse(input);
+            String message = command.execute(tasks, ui, storage);
+            this.exit = command.isExit();
+            return message;
         } catch (DukeException e) {
             return "☹ OOPS!!! " + e.getMessage();
         } catch (Exception e) {
+            // Keep generic fallback for unexpected errors
             return "Unexpected error: " + e.getMessage();
         }
     }
 
-    public boolean shouldExit() { return exit; }
+    /**
+     * Checks whether the application should exit.
+     *
+     * @return {@code true} if the application should exit, {@code false} otherwise.
+     */
+    public boolean shouldExit() {
+        return exit;
+    }
 }
