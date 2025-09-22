@@ -18,3 +18,93 @@ Run the following command:
 
 ```bash
 java -jar Nami.jar
+This should open a GUI window if you are using the GUI version. If you’re using CLI, the terminal will show the text-based interface.
+
+Features
+Adding a Task: add
+Adds a task to the task list. There are 3 types of tasks: todo, events, and deadlines.
+
+Format:
+For Todo:
+
+bash
+Copy code
+add t/Todo DESCRIPTION
+For Deadline:
+
+bash
+Copy code
+add t/deadline DESCRIPTION /by DATE (DD/MM/YYYY HH:MM)
+For Event:
+
+bash
+Copy code
+add t/event DESCRIPTION /from DATE (DD/MM/YYYY HH:MM) /to DATE (DD/MM/YYYY HH:MM)
+Listing All Tasks: list
+Shows a list of all tasks in the task list.
+
+Format:
+bash
+Copy code
+list
+Locating Tasks by Description: find
+Finds tasks whose descriptions contain the given keywords.
+
+Format:
+bash
+Copy code
+find KEYWORD [MORE_KEYWORDS]
+Examples:
+bash
+Copy code
+find assignment
+find project deadline
+Deleting a Task: delete
+Deletes the specified task from the task list.
+
+Format:
+bash
+Copy code
+delete INDEX
+Examples:
+bash
+Copy code
+delete 2
+Marking / Unmarking tasks as done: mark / unmark
+Format:
+bash
+Copy code
+mark INDEX
+unmark INDEX
+Examples:
+bash
+Copy code
+mark 2
+unmark 2
+Exiting the Program: bye
+Exits the application.
+
+Format:
+bash
+Copy code
+bye
+Saving the Data
+Tasks are automatically saved after any change (add, edit, delete) to the task list. You do not need to manually save the data.
+
+Editing the Data File
+The tasks data is stored in a file: data/nami.txt.
+
+Known Issues
+Command Summary
+Action	Format	Examples
+Add	add t/TASK_TYPE d/DESCRIPTION	add t/todo d/Complete homework
+List	list	list
+Delete	delete INDEX	delete 1
+Find	find KEYWORD [MORE_KEYWORDS]	find project
+Exit	bye	bye
+
+Task Types (t/TASK_TYPE):
+The task can be a todo, deadline, or event.
+
+Keywords for find:
+Search is case-insensitive. The order of the keywords doesn’t matter.
