@@ -1,4 +1,7 @@
 package nami.task;
+
+import java.time.LocalDateTime;
+
 public abstract class Tasks {
     protected String description;
     protected boolean isDone;
@@ -45,4 +48,8 @@ public abstract class Tasks {
     public abstract String getList();
 
     public abstract String toStorageFormat();
+
+    public LocalDateTime getSortKey() {
+        return null;
+    }
 }

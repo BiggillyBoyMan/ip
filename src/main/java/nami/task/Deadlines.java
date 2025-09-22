@@ -46,5 +46,9 @@ public class Deadlines extends Tasks {
     public String toStorageFormat() {
         return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + deadline;
     }
+
+    @Override
+    public LocalDateTime getSortKey() {
+        return this.deadline;
+    }
 }
-//

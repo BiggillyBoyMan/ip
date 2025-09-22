@@ -1,4 +1,5 @@
 package nami.task;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -35,5 +36,18 @@ public class TaskList {
     public ArrayList<Tasks> asList() {
         return tasks;
     }
+
+    public void sort() {
+        tasks.sort((task1, task2) -> {
+            LocalDateTime date1 = task1.getSortKey();
+            LocalDateTime date2 = task2.getSortKey();
+
+            if (date1 == null && date2 == null) return 0;
+            if (date1 == null) return -1;
+            if (date2 == null) return 1;
+
+            return date1.compareTo(date2);
+        });
+    }
+
 }
-//

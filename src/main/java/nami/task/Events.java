@@ -61,5 +61,11 @@ public class Events extends Tasks{
     public String toStorageFormat() {
         return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + startTime + " | " + endTime;
     }
+
+    @Override
+    public LocalDateTime getSortKey() {
+        return this.startTime;
+    }
+
 }
 //testing

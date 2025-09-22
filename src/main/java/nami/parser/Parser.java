@@ -82,6 +82,9 @@ public class Parser {
                 }
                 return new nami.command.FindCommand(args);
 
+            case "sort":
+                return new SortCommand();
+
 
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
