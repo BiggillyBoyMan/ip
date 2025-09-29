@@ -1,51 +1,59 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
-    id 'com.github.johnrengelman.shadow' version '7.1.2' // keep 7.x if your Gradle is 7.x
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-repositories { mavenCentral() }
+repositories {
+    mavenCentral()
+}
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.2')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
     String javaFxVersion = '17.0.7'
 
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
+
+    // JavaFX for multiple platforms
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+
     implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+
     implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-test { useJUnitPlatform() }
+test {
+    useJUnitPlatform()
 
-application {
-    mainClass.set("nami.ui.Main")          // GUI entry
+    testLogging {
+        events "passed", "skipped", "failed"
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+        showStandardStreams = false
+    }
 }
 
-/* Make both jars executable and named nicely */
-jar {
-    manifest { attributes 'Main-Class': 'nami.ui.Main' }
-    archiveBaseName.set("Nami")
-    archiveVersion.set("")
-    archiveClassifier.set("")
+application {
+    mainClass.set("nami.Launcher")  // points to the Launcher in main package
 }
 
 shadowJar {
-    manifest { attributes 'Main-Class': 'nami.ui.Main' }
-    archiveFileName.set("Nami.jar")     // single nice filename
+    manifest { attributes 'Main-Class': 'nami.Launcher' }
+    archiveFileName.set("Nami.jar")
 }
 
 run {
-    jvmArgs '-ea'
     standardInput = System.in
 }
