@@ -6,105 +6,134 @@ Nami is a task management application designed to help you organize your tasks e
 
 Ensure you have Java 17 or above installed.
 
-### Download the latest .jar file:
-[Download the latest JAR from here](#)
+### Download the Latest `.jar` File:
+[Download the latest JAR from here](https://github.com/BiggillyBoyMan/ip/releases)
 
 Copy the JAR file to the folder where you want to run Nami.
 
-### Run the application:
+### Run the Application:
+
 Open a terminal in the folder where the JAR file is located.
 
 Run the following command:
 
 ```bash
 java -jar Nami.jar
+```
+
 This should open a GUI window if you are using the GUI version. If you’re using CLI, the terminal will show the text-based interface.
 
 Features
-Adding a Task: add
+1. Adding a Task: add
 Adds a task to the task list. There are 3 types of tasks: todo, events, and deadlines.
 
 Format:
+
+```bash
+
+add t/TASK_TYPE DESCRIPTION
+```
+
 For Todo:
 
-bash
-Copy code
-add t/Todo DESCRIPTION
+```bash
+add t/todo DESCRIPTION
+```
+
 For Deadline:
 
-bash
-Copy code
+```bash
 add t/deadline DESCRIPTION /by DATE (DD/MM/YYYY HH:MM)
+```
+
 For Event:
 
-bash
-Copy code
+```bash
 add t/event DESCRIPTION /from DATE (DD/MM/YYYY HH:MM) /to DATE (DD/MM/YYYY HH:MM)
-Listing All Tasks: list
+```
+
+2. Listing All Tasks: list
 Shows a list of all tasks in the task list.
 
 Format:
-bash
-Copy code
+
+```bash
 list
-Locating Tasks by Description: find
+```
+
+3. Locating Tasks by Description: find
 Finds tasks whose descriptions contain the given keywords.
 
 Format:
-bash
-Copy code
+
+```bash
 find KEYWORD [MORE_KEYWORDS]
+```
+
 Examples:
-bash
-Copy code
+
+
+```bash
 find assignment
 find project deadline
-Deleting a Task: delete
+```
+
+4. Deleting a Task: delete
 Deletes the specified task from the task list.
 
 Format:
-bash
-Copy code
+
+```bash
 delete INDEX
+```
 Examples:
-bash
-Copy code
+
+```bash
 delete 2
-Marking / Unmarking tasks as done: mark / unmark
+```
+
+5. Marking / Unmarking Tasks as Done: mark / unmark
+Mark or unmark a task as done.
+
 Format:
-bash
-Copy code
+
+```bash
 mark INDEX
 unmark INDEX
+```
+
 Examples:
-bash
-Copy code
+
+```bash
 mark 2
 unmark 2
-Exiting the Program: bye
+```
+
+6. Exiting the Program: bye
 Exits the application.
 
 Format:
-bash
-Copy code
+
+```bash
 bye
+```
+
 Saving the Data
 Tasks are automatically saved after any change (add, edit, delete) to the task list. You do not need to manually save the data.
 
 Editing the Data File
 The tasks data is stored in a file: data/nami.txt.
 
-Known Issues
-Command Summary
-Action	Format	Examples
-Add	add t/TASK_TYPE d/DESCRIPTION	add t/todo d/Complete homework
-List	list	list
-Delete	delete INDEX	delete 1
-Find	find KEYWORD [MORE_KEYWORDS]	find project
-Exit	bye	bye
+Task Types (t/TASK_TYPE)
+The task can be one of the following types:
 
-Task Types (t/TASK_TYPE):
-The task can be a todo, deadline, or event.
+todo: General tasks
 
-Keywords for find:
-Search is case-insensitive. The order of the keywords doesn’t matter.
+deadline: Tasks with deadlines
+
+event: Tasks involving events with start and end dates
+
+Keywords for find
+The search is case-insensitive.
+
+The order of the keywords doesn’t matter.
