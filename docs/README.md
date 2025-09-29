@@ -23,8 +23,8 @@ java -jar Nami.jar
 
 This should open a GUI window if you are using the GUI version. If you’re using CLI, the terminal will show the text-based interface.
 
-Features
-1. Adding a Task: add
+## Features
+### 1. Adding a Task: add
 Adds a task to the task list. There are 3 types of tasks: todo, events, and deadlines.
 
 Format:
@@ -52,7 +52,7 @@ For Event:
 add t/event DESCRIPTION /from DATE (DD/MM/YYYY HH:MM) /to DATE (DD/MM/YYYY HH:MM)
 ```
 
-2. Listing All Tasks: list
+### 2. Listing All Tasks: list
 Shows a list of all tasks in the task list.
 
 Format:
@@ -61,7 +61,7 @@ Format:
 list
 ```
 
-3. Locating Tasks by Description: find
+### 3. Locating Tasks by Description: find
 Finds tasks whose descriptions contain the given keywords.
 
 Format:
@@ -78,7 +78,7 @@ find assignment
 find project deadline
 ```
 
-4. Deleting a Task: delete
+### 4. Deleting a Task: delete
 Deletes the specified task from the task list.
 
 Format:
@@ -92,7 +92,7 @@ Examples:
 delete 2
 ```
 
-5. Marking / Unmarking Tasks as Done: mark / unmark
+### 5. Marking / Unmarking Tasks as Done: mark / unmark
 Mark or unmark a task as done.
 
 Format:
@@ -109,7 +109,7 @@ mark 2
 unmark 2
 ```
 
-6. Exiting the Program: bye
+### 6. Exiting the Program: bye
 Exits the application.
 
 Format:
